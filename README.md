@@ -25,8 +25,8 @@ A  implementação é  livre,  entretanto,  não  deve  quebrar  o  encapsulamen
 implicaria em desclassificação do projeto. Basicamente, a estrutura de dados para conversão de expressões 
 deve conter as seguintes operações: 
  
-#define LOGAR 1 /* Sinaliza que a execução da expressão será logada */ 
-#define NAO_LOGAR 0 /* Sinaliza que a execução da expressão não será logada */ 
+-#define LOGAR 1 /* Sinaliza que a execução da expressão será logada */ 
+-#define NAO_LOGAR 0 /* Sinaliza que a execução da expressão não será logada */ 
  
 /* Converte uma expressão infixa para posfixa. 
    PARAMETROS: 
