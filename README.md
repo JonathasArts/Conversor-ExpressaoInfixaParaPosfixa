@@ -1,4 +1,0 @@
-Conversor-ExpressaoInfixaParaPosfixa
-====================================
-
-Conversor ExpressaoInfixaParaPosfixa
