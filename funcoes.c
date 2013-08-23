@@ -71,7 +71,8 @@ int pegaInfixo(char infixo[]){
 PARAMETROS: - string digitada na função pegaInfixo
 RETORNO: - retorna 1 caso esteja digitada corretamente ou retorna 0 se estiver errada */
 int expressaoInfixaValida(char infixo[]){
-	int i, j, verificacao = VERDADEIRO, verificacao1 = VERDADEIRO;	// Variaveis utilizadas na função
+	int i, j, par1=0, par2=0;
+	int verificacao = VERDADEIRO, verificacao1 = VERDADEIRO, verificacao2 = VERDADEIRO;	// Variaveis utilizadas na função
 	
 	if(infixo[0]=='\0'){
 		verificacao==FALSO;
@@ -91,6 +92,7 @@ int expressaoInfixaValida(char infixo[]){
 			}
 		}
 		if(infixo[i] == '('){									// Se for '(' ver se esta fechado e se depois existe um '(' ou LETRA
+			par1++;
 			for(j=i; infixo[j]!='\0'; j++){						// Laço para verificar se cada parentese está sendo fechado
 				if(infixo[j]==')'){								// Se estiver fechado...
 					break;										// ...sai do laço
@@ -121,6 +123,7 @@ int expressaoInfixaValida(char infixo[]){
 		}
 	/* ------- Verifica se depois de um ')' existe um ')', '\0' ou OPERADOR ------- */
 		else if(infixo[i] == ')'){
+			par2++;
 			if(infixo[1+i] != ')' && !(eOperador(infixo[1+i])) && infixo[1+i] != '\0'){
 				verificacao = FALSO;							// Se não é ')', '\0' ou OPERADOR invalida a expressão
 				break;											// Sai do laço
@@ -128,9 +131,15 @@ int expressaoInfixaValida(char infixo[]){
 		}	
 	}															// FIM do laço
 	
+	if(par1 == par2){
+         verificacao2 = VERDADEIRO;
+	}
+	else{
+		verificacao2 = FALSO;
+	}
 	
 	/* ------- Verifica Se Foi Definida Como Expressão VÁLIDA ou INVÁLIDA ------- */
-    if(verificacao==VERDADEIRO && verificacao1==VERDADEIRO){
+    if(verificacao==VERDADEIRO && verificacao1==VERDADEIRO && verificacao2==VERDADEIRO){
     	return VERDADEIRO;										// Se for VÁLIDA retorna VERDADEIRO
 	} 
     else{
@@ -353,15 +362,16 @@ void imprimeResultado(char infixo[], char posfixo[]){
 	textcolor(LIGHTGRAY);
 }/* FIM FUNÇÃO */
 
+// VERIFICAR SINAL NEGATIVO ANTES DO PARENTESES
 
 /* FUNÇÃO PARA EXECUTAR A EXPRESSÃO POSFIXADA, DE ACORDO COM SEUS RESPECTIVOS VOLARES.
 PARAMETROS: - Expressão no formato POSFIXO; String contendo os operandos existentes na expressão; Array de float com os respectivos valores
 de cada operando.
 RETORNO: - void (O valor com o resultado da expressão é armazenado         vvAQUIvv   no float VALOR*/
 float executaExpressao(char posfixo[], char operandos[], float valores[], float *valor){
-	int i,j,h,k=1;
+	int i,j,h,k=1;								// Variáveis para os laços
 	char calculo[2];
-	float numero[2], aux[MAX_EXPRESSAO/2];
+	float numero[2], aux[MAX_EXPRESSAO/2];		
 	TPilha p;
 	
 	criapilha(&p);								// Cria a pilha
@@ -369,8 +379,9 @@ float executaExpressao(char posfixo[], char operandos[], float valores[], float 
 	aux[k-1] = valores[0];						// Caso digite apenas uma letra sem operador
 	
 	for(i=0; posfixo[i]!='\0'; i++){			// Laço para calcular o valor da expressão
+		//printf(" %.2f \n", aux[k-1]);
 		if(isalpha(posfixo[i])){				// Se for operando(letra)
-			empilha(&p, posfixo[i]);				// Empilha
+			empilha(&p, posfixo[i]);			// Empilha
 		}
 		else{									// Se não for operando(letra) será operador
 			switch(posfixo[i]){					// Para verificar qual é o operador
@@ -391,7 +402,7 @@ float executaExpressao(char posfixo[], char operandos[], float valores[], float 
 							}
 						}
 					}
-					aux[k] = numero[0] + numero[1];				// Calcula a soma
+					aux[k] = numero[1] + numero[0];				// Calcula a soma
 					k++;										// Incremento do k para aux que armazena valores já calculados
 					empilha(&p, '>');							// Empilha para representar um valor já calculado
 					break;										// Sai do switch
@@ -412,7 +423,7 @@ float executaExpressao(char posfixo[], char operandos[], float valores[], float 
 							}
 						}
 					}
-					aux[k] = numero[0] - numero[1];				// Calcula a subtração
+					aux[k] = numero[1] - numero[0];				// Calcula a subtração
 					k++;										// Incremento do k para aux que armazena valores já calculados
 					empilha(&p, '>');							// Empilha para representar um valor já calculado
 					break;										// Sai do switch
@@ -433,7 +444,7 @@ float executaExpressao(char posfixo[], char operandos[], float valores[], float 
 							}
 						}
 					}
-					aux[k] = numero[0] * numero[1];				// Calcula a multiplicação
+					aux[k] = numero[1] * numero[0];				// Calcula a multiplicação
 					k++;										// Incremento do k para aux que armazena valores já calculados
 					empilha(&p, '>');							// Empilha para representar um valor já calculado
 					break;										// Sai do switch
@@ -454,7 +465,7 @@ float executaExpressao(char posfixo[], char operandos[], float valores[], float 
 							}
 						}
 					}
-					aux[k] = numero[0] / numero[1];				// Calcula a divisão
+					aux[k] = numero[1] / numero[0];				// Calcula a divisão
 					k++;										// Incremento do k para aux que armazena valores já calculados
 					empilha(&p, '>');							// Empilha para representar um valor já calculado
 					break;										// Sai do switch
@@ -475,7 +486,7 @@ float executaExpressao(char posfixo[], char operandos[], float valores[], float 
 							}
 						}
 					}
-					aux[k] = pow(numero[0], numero[1]);			// Calcula a potência
+					aux[k] = pow(numero[1], numero[0]);			// Calcula a potência
 					k++;										// Incremento do k para aux que armazena valores já calculados
 					empilha(&p, '>');							// Empilha para representar um valor já calculado
 					break;										// Sai do switch
@@ -564,9 +575,9 @@ float pegaValor(char *operand, float valores[]){
 						}
 					}
 				}
-				else if(isalpha(teste[j])){
-					valida = FALSO;
-					break;
+				else if(isalpha(teste[j])){				// Se for letra...
+					valida = FALSO;						// ... invalida o valor e...
+					break;								// ... sai do laço
 				}
 				else{									// Se não for digito...
 					valida = FALSO;						// ... invalida o valor e...
