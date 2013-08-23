@@ -1,13 +1,13 @@
 /*	|-----------------------------------------------------------------------------------------------|
-	|			PROJETO REFERENTE A PARTE DA 2ª NOTA DA DISCIPLINA "ESTRUTURAS DE DADOS"    		|
-	|                       		Professores: Alex Sandro	                  		            |
-	|      			CONVERSOR DE EXPRESSÃO NO FORMATO INFIXO PARA POSFIXO: InfPosf!                 |
+	|		PROJETO REFERENTE A PARTE DA 2ª NOTA DA DISCIPLINA "ESTRUTURAS DE DADOS"    	|
+	|                       		Professores: Alex Sandro	                  	|
+	|      		CONVERSOR DE EXPRESSÃO NO FORMATO INFIXO PARA POSFIXO: InfPosf!         	|
 	|                        Alunos: Jonathas Almeida e Natacha Targino                             |
 	|                                                                                               |
 	|                          Data da última modificação: 18/08/2013                               |
-	|																								|
-	|	Este Programa é protegido por leis internacionais de software e pela LEI DE DEUS.			|
-	|	Afinal de contas, só Deus sabe como ele Funciona... =P										|
+	|												|
+	|	Este Programa é protegido por leis internacionais de software e pela LEI DE DEUS.	|
+	|	Afinal de contas, só Deus sabe como ele Funciona... =P					|
 	|-----------------------------------------------------------------------------------------------|
 	Não alterar desta linha para baixo
 */
