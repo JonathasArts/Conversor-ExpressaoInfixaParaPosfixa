@@ -14,3 +14,4 @@
 		void imprimeResultado(char infixo[], char posfixo[]);
 		int imprimeMensagem();
 		float pegaValor(char *operand, float valores[]);
+
