@@ -173,7 +173,7 @@ char* converteInfixParaPosfixa(char infixo[], int logarExecucao){
 /* --------- Caso esteja logado ---------------- */
 	if(logarExecucao){
 		textcolor(BROWN);
-		printf("\n\n PASSOS DA EXECUSSAO:\n");
+		printf("\n\n PASSOS DA EXECUCAO:\n");
 		printf(" ------------------------------------------------------------------------------ ");
 		textcolor(DARKGRAY);
 		printf(" Passo\tChar\tSituacao da Pilha\t\tSaida\n =====\t===\t=[Topo|--->Base]=\t\t==========\n");
